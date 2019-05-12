@@ -1,4 +1,8 @@
 #!/bin/bash
+##
+# Warning :
+# This script only works on zcs and later user
+
 FOOTER="`zmprov gcf zimbraDomainMandatoryMailSignatureEnabled | awk -F ":" '{print $2}'`"
 TLD="`zmprov gs \`zmhostname\` | grep "zimbraServiceHostname:" | awk -F: '{ print $NF }' | cut -d"." -f2,3,4`"
 
