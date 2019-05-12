@@ -1,2 +1,2 @@
 # zimbra-tools
-General script to do Zimbra operate/maintenance 
+General script to operate/maintenance zimbra
