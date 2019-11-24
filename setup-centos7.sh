@@ -8,7 +8,7 @@ tar xzf Python-3.7.4.tgz
 cd Python-3.7.4
 ./configure --enable-optimizations
 make install
-ln -sf /usr/bin/python /usr/local/bin/python3.7
+ln -sf /usr/local/bin/python3.7 /usr/bin/python
 
 echo "Install python pip"
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
