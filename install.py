@@ -1,15 +1,23 @@
 import os
 import requests
+import tarfile
 #from clint.textui import colored
 from tqdm import tqdm
 from pathlib import Path
 
 pwd=os.getcwd()
-zimbra = os.path.join(pwd, "zimbra.tar.bz2")
-source_zimbra = Path(zimbra)
+zimbra = os.path.join(pwd, "zimbra.tgz")
+src = os.path.join(pwd, "src")
+
+compressed_zimbra = Path(zimbra)
+ext_src = Path(src)
+
 url = 'https://files.zimbra.com/downloads/8.8.15_GA/zcs-8.8.15_GA_3869.RHEL7_64.20190918004220.tgz'
 
 def download_zimbra(url, zimbra):
+    """
+    Download Source Code
+    """
     r = requests.get(url, stream=True)
     total_size = int(r.headers.get('content-length'))
     block_size = 1024 #1 Kibibyte
@@ -22,7 +30,35 @@ def download_zimbra(url, zimbra):
                 f.write(chunk)
     t.close()    
 
-if(source_zimbra.exists()):
-    print("Source folder available, Remove to re-download.")
-else:
+def decompress(tar_file, path, members=None):
+    """
+    Extracts `tar_file` and puts the `members` to `path`.
+    If members is None, all members on `tar_file` will be extracted.
+    """
+    tar = tarfile.open(tar_file, mode="r:gz")
+    if members is None:
+        members = tar.getmembers()
+    # with progress bar
+    # set the progress bar
+    progress = tqdm(members)
+    for member in progress:
+        tar.extract(member, path=path)
+        # set the progress description of the progress bar
+        progress.set_description(f"Extracting {member.name}")
+    # or use this
+    # tar.extractall(members=members, path=path)
+    # close the file
+    tar.close()
+
+           
+if compressed_zimbra.exists() == False and ext_src.exists() == False:
     download_zimbra(url, zimbra)
+    decompress("zimbra.tgz", "src")
+    compressed_zimbra.unlink()  
+elif compressed_zimbra.exists() and ext_src.exists() == False: 
+        decompress("zimbra.tgz", "src")
+        compressed_zimbra.unlink()
+else:
+    print("##################################################################################")
+    print("# Zimbra source are available continue with installation if no installation occur")
+    print("##################################################################################")
