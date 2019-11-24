@@ -1,6 +1,6 @@
 import os
 import requests
-from clint.textui import colored
+#from clint.textui import colored
 from tqdm import tqdm
 from pathlib import Path
 
