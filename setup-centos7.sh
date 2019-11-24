@@ -13,12 +13,12 @@ make install
 rm -rvf /usr/src/Python-3.7.4.tgz
 
 ln -sf /usr/local/bin/python3.7 /usr/bin/python
-export PATH=$PATH:/root/.local/bin:/usr/local/bin
+export PATH=$PATH:/$USER/.local/bin:/usr/local/bin
 
 echo "Install python pip"
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 /usr/bin/python get-pip.py
 
 echo "install prerequisite module"
-/usr/local/bin/pip install --user --requirement $REQUIREMENT="$(pwd)/requirements.txt"
+/usr/local/bin/pip install --user --requirement $REQUIREMENT
 /usr/local/bin/pip install requests --upgrade
