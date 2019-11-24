@@ -1,5 +1,6 @@
 #!/bin/bash
 
+ENV_FILE="/etc/profile.d/zimbra-tool.sh"
 REQUIREMENT="$(pwd)/requirements.txt"
 
 echo "Installing Python 3.7"
@@ -12,7 +13,10 @@ cd Python-3.7.4
 make install
 rm -rvf /usr/src/Python-3.7.4.tgz
 
-#ln -sf /usr/local/bin/python3.7 /usr/bin/python
+/usr/bin/cat <<EOM >$ENV_FILE
+export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
+EOM
+
 export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
 
 echo "Install python pip"
