@@ -4,6 +4,7 @@ import tarfile
 #from clint.textui import colored
 from tqdm import tqdm
 from pathlib import Path
+from tabulate import tabulate
 
 pwd=os.getcwd()
 zimbra = os.path.join(pwd, "zimbra.tgz")
@@ -50,7 +51,17 @@ def decompress(tar_file, path, members=None):
     # close the file
     tar.close()
 
-           
+"""
+Display message in box
+"""
+
+zimbra_msg = """
+Zimbra ./src/ folder are available continue with installation if no installation occur
+"""
+
+table = [[zimbra_msg]]
+display_msg = tabulate(table, tablefmt='grid')
+
 if compressed_zimbra.exists() == False and ext_src.exists() == False:
     download_zimbra(url, zimbra)
     decompress("zimbra.tgz", "src")
@@ -59,6 +70,4 @@ elif compressed_zimbra.exists() and ext_src.exists() == False:
         decompress("zimbra.tgz", "src")
         compressed_zimbra.unlink()
 else:
-    print("##################################################################################")
-    print("# Zimbra source are available continue with installation if no installation occur")
-    print("##################################################################################")
+    print(display_msg)
