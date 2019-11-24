@@ -15,5 +15,5 @@ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 /usr/local/bin/python get-pip.py
 
 echo "install prerequisite module"
-pip install --user --requirement requirements.txt
-pip install requests --upgrade
+/usr/local/bin/pip install --user --requirement requirements.txt
+/usr/local/bin/pip install requests --upgrade
