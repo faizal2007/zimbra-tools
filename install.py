@@ -51,10 +51,6 @@ def decompress(tar_file, path, members=None):
     # close the file
     tar.close()
 
-"""
-Display message in box
-"""
-
 zimbra_msg = """
 Zimbra ./src/ folder are available continue with installation if no installation occur
 """
