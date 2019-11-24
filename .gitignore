@@ -1,0 +1,3 @@
+# Ignore archiving file
+*.tar.bz2
+src/
