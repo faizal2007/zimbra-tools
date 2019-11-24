@@ -17,7 +17,7 @@ export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
 
 echo "Install python pip"
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-/usr/bin/python get-pip.py
+/usr/local/bin/python3.7 get-pip.py
 
 echo "install prerequisite module"
 /usr/local/bin/pip install --user --requirement $REQUIREMENT
